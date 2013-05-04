@@ -5,11 +5,11 @@
 TEST_GROUP(ASoundexEncoding) {};
 
 // START:test
-TEST(ASoundexEncoding, RetainsSoleLetterOfOneLetterWord) {
+TEST(ASoundexEncoding, AppendsZerosToWordForOneLetterWord) {
    Soundex soundex;
 
    auto encoded = soundex.encode("A");
 
-   CHECK_EQUAL("A", encoded);
+   CHECK_EQUAL("A000", encoded);
 }
 // END:test
