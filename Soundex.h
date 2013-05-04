@@ -1,12 +1,12 @@
 #ifndef Soundex_h
 #define Soundex_h
 
-// START:nil
+// START:impl
 class Soundex {
 public:
    std::string encode(const std::string& word) const {
-      return nullptr;
+      return "A";
    }
 };
-// END:nil
+// END:impl
 #endif
