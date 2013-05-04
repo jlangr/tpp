@@ -6,7 +6,7 @@ class Soundex {
 public:
    std::string encode(const std::string& word) const {
 // START_HIGHLIGHT
-      return "A000";
+      return word + "000";
 // END_HIGHLIGHT
    }
 };
