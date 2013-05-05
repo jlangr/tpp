@@ -33,31 +33,28 @@ public:
       return word[0];
    }
 
-// START:impl
-// START_HIGHLIGHT
    std::string encodeTail(const std::string& word, std::string& code) const {
-// END_HIGHLIGHT
       if (word[1] == 0) return "";
-// START_HIGHLIGHT
       code += codeFor(word[1]);
       return encodeTail(tail(word), code);
-// END_HIGHLIGHT
    }
 
-// START_HIGHLIGHT
    std::string tail(const std::string& word) const {
       return word.substr(1);
    }
-// END_HIGHLIGHT
-// END:impl
 
    std::string codeFor(char c) const {
       return codes_[static_cast<size_t>(c)];
    }
 
+// START:impl
+   const static size_t MaxCodeLength{4};
    std::string zeroPad(const std::string& code) const {
-      return code + (hasEncodedCharacters(code) ? "00" : "000");
+// START_HIGHLIGHT
+      return code + std::string(MaxCodeLength - code.length(), '0');
+// END_HIGHLIGHT
    }
+// END:impl
 
    bool hasEncodedCharacters(const std::string& code) const {
       return code[1] != 0;
