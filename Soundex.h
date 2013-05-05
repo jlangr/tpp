@@ -17,22 +17,33 @@ public:
       codes_['r'] = "6";
    }
 
+// START:impl
    std::string encode(const std::string& word) const {
       std::string code("");
+// START_HIGHLIGHT
       code += head(word);
       encodeTail(word, code);
+// END_HIGHLIGHT
       return zeroPad(code);
    }
+   // ...
+// END:impl
 
    char head(const std::string& word) const {
       return word[0];
    }
 
+// START:impl
+// START_HIGHLIGHT
    std::string encodeTail(const std::string& word, std::string& code) const {
+// END_HIGHLIGHT
       if (word[1] == 0) return "";
+// START_HIGHLIGHT
       code += codeFor(word[1]);
       return encodeTail(word.substr(1), code);
+// END_HIGHLIGHT
    }
+// END:impl
 
    std::string codeFor(char c) const {
       return codes_[static_cast<size_t>(c)];
