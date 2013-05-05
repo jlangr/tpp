@@ -25,11 +25,10 @@ public:
 
 // START:impl
    std::string encodeTail(const std::string& word) const {
-      if (word[1] != 0) 
+      if (word[1] == 0) return "";
 // START_HIGHLIGHT
-         return codes_[static_cast<size_t>(word[1])];
+     return codes_[static_cast<size_t>(word[1])];
 // END_HIGHLIGHT
-      return "";
    }
    // ...
 // END:impl
