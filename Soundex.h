@@ -25,11 +25,15 @@ public:
    }
 // END_HIGHLIGHT
 
-// START_HIGHLIGHT
    std::string zeroPad(const std::string& code) const {
-      if (code[1] != 0)
-         return code + "00";
-      return code + "000";
+// START_HIGHLIGHT
+      return code + (hasEncodedCharacters(code) ? "00" : "000");
+// END_HIGHLIGHT
+   }
+
+// START_HIGHLIGHT
+   bool hasEncodedCharacters(const std::string& code) const {
+      return code[1] != 0;
    }
 // END_HIGHLIGHT
 };
