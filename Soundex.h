@@ -43,7 +43,7 @@ public:
 
 // START_HIGHLIGHT
    std::string codeFor(char c) const {
-         return codes_[static_cast<size_t>(c)];
+      return codes_[static_cast<size_t>(c)];
    }
 // END_HIGHLIGHT
    // ...
