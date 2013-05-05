@@ -11,11 +11,9 @@ TEST(ASoundexEncoding, AppendsZerosToWordForOneLetterWord) {
    CHECK_EQUAL("B000", soundex.encode("B"));
 }
 
-// START:test
 TEST(ASoundexEncoding, ReplacesConsonantsWithAppropriateDigits) {
    CHECK_EQUAL("A100", soundex.encode("Ab"));
    CHECK_EQUAL("A200", soundex.encode("Ac"));
-// START_HIGHLIGHT
    CHECK_EQUAL("A300", soundex.encode("Ad"));
    CHECK_EQUAL("A100", soundex.encode("Af"));
    CHECK_EQUAL("A200", soundex.encode("Ag"));
@@ -32,6 +30,11 @@ TEST(ASoundexEncoding, ReplacesConsonantsWithAppropriateDigits) {
    CHECK_EQUAL("A100", soundex.encode("Av"));
    CHECK_EQUAL("A200", soundex.encode("Ax"));
    CHECK_EQUAL("A200", soundex.encode("Az"));
-// END_HIGHLIGHT
+}
+
+// START:test
+TEST(ASoundexEncoding, ReplacesMultipleConsonantsWithDigits) {
+   CHECK_EQUAL("A234", soundex.encode("Acdl"));
 }
 // END:test
+

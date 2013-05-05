@@ -1,13 +1,10 @@
 #ifndef Soundex_h
 #define Soundex_h
 
-// START:impl
 class Soundex {
 public:
    Soundex() {
-// START_HIGHLIGHT
       initializeCodeMap();
-// END_HIGHLIGHT
    }
 
    void initializeCodeMap() {
@@ -19,12 +16,11 @@ public:
       codes_['m'] = codes_['n'] = "5";
       codes_['r'] = "6";
    }
-   // ...
-// END:impl
 
    std::string encode(const std::string& word) const {
       std::string code("");
-      code += head(word) + encodeTail(word);
+      code += head(word);
+      encodeTail(word, code);
       return zeroPad(code);
    }
 
@@ -32,21 +28,15 @@ public:
       return word[0];
    }
 
-// START:impl
-   std::string encodeTail(const std::string& word) const {
+   std::string encodeTail(const std::string& word, std::string& code) const {
       if (word[1] == 0) return "";
-// START_HIGHLIGHT
-      return codeFor(word[1]);
-// END_HIGHLIGHT
+      code += codeFor(word[1]);
+      return encodeTail(word.substr(1), code);
    }
 
-// START_HIGHLIGHT
    std::string codeFor(char c) const {
       return codes_[static_cast<size_t>(c)];
    }
-// END_HIGHLIGHT
-   // ...
-// END:impl
 
    std::string zeroPad(const std::string& code) const {
       return code + (hasEncodedCharacters(code) ? "00" : "000");
@@ -58,8 +48,6 @@ public:
 
 private:
    std::string codes_[128];
-// START:impl
 };
-// END:impl
 
 #endif
