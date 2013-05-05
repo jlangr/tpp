@@ -4,10 +4,12 @@
 // START:impl
 class Soundex {
 public:
+// START_HIGHLIGHT
    Soundex() {
       codes_['b'] = "1";
       codes_['c'] = "2";
    }
+// END_HIGHLIGHT
    // ...
 // END:impl
 
@@ -41,8 +43,10 @@ public:
    }
 
 // START:impl
+// START_HIGHLIGHT
 private:
    std::string codes_[128];
+// END_HIGHLIGHT
 };
 // END:impl
 
