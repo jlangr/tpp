@@ -4,12 +4,21 @@
 // START:impl
 class Soundex {
 public:
-// START_HIGHLIGHT
    Soundex() {
-      codes_['b'] = "1";
-      codes_['c'] = "2";
-   }
+// START_HIGHLIGHT
+      initializeCodeMap();
 // END_HIGHLIGHT
+   }
+
+   void initializeCodeMap() {
+      codes_['b'] = codes_['f'] = codes_['p'] = codes_ ['v'] = "1";
+      codes_['c'] = codes_['g'] = codes_['j'] = codes_ ['k'] = 
+         codes_['q'] = codes_['s'] = codes_['x'] = codes_['z'] = "2";
+      codes_['d'] = codes_['t'] = "3";
+      codes_['l'] = "4";
+      codes_['m'] = codes_['n'] = "5";
+      codes_['r'] = "6";
+   }
    // ...
 // END:impl
 
@@ -27,10 +36,16 @@ public:
    std::string encodeTail(const std::string& word) const {
       if (word[1] != 0) 
 // START_HIGHLIGHT
-         return codes_[static_cast<size_t>(word[1])];
+         return codeFor(word[1]);
 // END_HIGHLIGHT
       return "";
    }
+
+// START_HIGHLIGHT
+   std::string codeFor(char c) const {
+         return codes_[static_cast<size_t>(c)];
+   }
+// END_HIGHLIGHT
    // ...
 // END:impl
 
@@ -42,11 +57,9 @@ public:
       return code[1] != 0;
    }
 
-// START:impl
-// START_HIGHLIGHT
 private:
    std::string codes_[128];
-// END_HIGHLIGHT
+// START:impl
 };
 // END:impl
 
