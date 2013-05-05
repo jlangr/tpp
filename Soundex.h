@@ -20,8 +20,8 @@ public:
 
 // START_HIGHLIGHT
    std::string encodeTail(const std::string& word) const {
-      if (word[1] != 0) return "1";
-      return "";
+      if (word[1] == 0) return "";
+      return "1";
    }
 // END_HIGHLIGHT
 
