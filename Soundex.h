@@ -40,9 +40,15 @@ public:
       if (word[1] == 0) return "";
 // START_HIGHLIGHT
       code += codeFor(word[1]);
-      return encodeTail(word.substr(1), code);
+      return encodeTail(tail(word), code);
 // END_HIGHLIGHT
    }
+
+// START_HIGHLIGHT
+   std::string tail(const std::string& word) const {
+      return word.substr(1);
+   }
+// END_HIGHLIGHT
 // END:impl
 
    std::string codeFor(char c) const {
