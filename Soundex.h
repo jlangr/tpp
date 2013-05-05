@@ -4,38 +4,46 @@
 // START:impl
 class Soundex {
 public:
+   Soundex() {
+      codes_['b'] = "1";
+      codes_['c'] = "2";
+   }
+   // ...
+// END:impl
+
    std::string encode(const std::string& word) const {
       std::string code("");
-// START_HIGHLIGHT
       code += head(word) + encodeTail(word);
       return zeroPad(code);
-// END_HIGHLIGHT
    }
 
-// START_HIGHLIGHT
    char head(const std::string& word) const {
       return word[0];
    }
-// END_HIGHLIGHT
 
-// START_HIGHLIGHT
+// START:impl
    std::string encodeTail(const std::string& word) const {
-      if (word[1] != 0) return "1";
+      if (word[1] != 0) 
+// START_HIGHLIGHT
+         return codes_[static_cast<size_t>(word[1])];
+// END_HIGHLIGHT
       return "";
    }
-// END_HIGHLIGHT
+   // ...
+// END:impl
 
    std::string zeroPad(const std::string& code) const {
-// START_HIGHLIGHT
       return code + (hasEncodedCharacters(code) ? "00" : "000");
-// END_HIGHLIGHT
    }
 
-// START_HIGHLIGHT
    bool hasEncodedCharacters(const std::string& code) const {
       return code[1] != 0;
    }
-// END_HIGHLIGHT
+
+// START:impl
+private:
+   std::string codes_[128];
 };
 // END:impl
+
 #endif
