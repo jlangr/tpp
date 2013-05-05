@@ -34,11 +34,10 @@ public:
 
 // START:impl
    std::string encodeTail(const std::string& word) const {
-      if (word[1] != 0) 
+      if (word[1] == 0) return "";
 // START_HIGHLIGHT
-         return codeFor(word[1]);
+      return codeFor(word[1]);
 // END_HIGHLIGHT
-      return "";
    }
 
 // START_HIGHLIGHT
