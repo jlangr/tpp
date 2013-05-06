@@ -17,17 +17,12 @@ public:
       codes_['r'] = "6";
    }
 
-// START:impl
    std::string encode(const std::string& word) const {
       std::string code("");
-// START_HIGHLIGHT
       code += head(word);
       encodeTail(word, code);
-// END_HIGHLIGHT
       return zeroPad(code);
    }
-   // ...
-// END:impl
 
    char head(const std::string& word) const {
       return word[0];
