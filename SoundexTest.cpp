@@ -2,10 +2,10 @@
 
 #include "Soundex.h"
 
-TEST_GROUP(ASoundexEncoding) {};
+TEST_GROUP(SoundexEncoding) {};
 
 // START:test
-TEST(ASoundexEncoding, AppendsZerosToWordForOneLetterWord) {
+TEST(SoundexEncoding, AppendsZerosToWordForOneLetterWord) {
    Soundex soundex;
 
    auto encoded = soundex.encode("A");
