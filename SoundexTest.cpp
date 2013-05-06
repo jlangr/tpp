@@ -32,13 +32,9 @@ TEST(ASoundexEncoding, ReplacesConsonantsWithAppropriateDigits) {
    CHECK_EQUAL("A200", soundex.encode("Az"));
 }
 
+// START:test
 TEST(ASoundexEncoding, ReplacesMultipleConsonantsWithDigits) {
    CHECK_EQUAL("A234", soundex.encode("Acdl"));
-}
-
-// START:test
-TEST(ASoundexEncoding, IgnoresVowelLikeLetters) {
-   CHECK_EQUAL("B234", soundex.encode("BAaEeIiOoUuHhYycdl"));
 }
 // END:test
 
