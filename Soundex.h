@@ -19,15 +19,11 @@ public:
       codes_['r'] = "6";
    }
 
-// START:impl
    std::string encode(const std::string& word) const {
-// START_HIGHLIGHT
       std::string code(1, toupper(head(word)));
-// END_HIGHLIGHT
       encode(word, code);
       return zeroPad(code);
    }
-// END:impl
 
    void encode(const std::string& word, std::string& code) const {
       auto tailToEncode = tail(word);
@@ -57,16 +53,24 @@ public:
       return word.substr(1);
    }
 
+// START:impl
    std::string codeFor(char c) const {
-      return codes_[static_cast<size_t>(c)];
+// START_HIGHLIGHT
+      return codes_[static_cast<size_t>(lower(c))];
+// END_HIGHLIGHT
    }
+// END:impl
 
    std::string zeroPad(const std::string& code) const {
       return code + std::string(MaxCodeLength - code.length(), '0');
    }
 
-   char upper(char c) {
+   char upper(char c) const {
       return std::toupper(static_cast<unsigned char>(c));
+   }
+
+   char lower(char c) const {
+      return std::tolower(static_cast<unsigned char>(c));
    }
 
 private:

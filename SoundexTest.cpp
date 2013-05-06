@@ -56,13 +56,17 @@ TEST(ASoundexEncoding, CombinesMultipleDuplicateEncodings) {
    CHECK_EQUAL("J100", soundex.encode("Jbbb"));
 }
 
-// START:test
 TEST(ASoundexEncoding, CombinesDuplicateCodesWhen2ndLetterDuplicates1st) {
    CHECK_EQUAL("B230", soundex.encode("bbcd"));
 }
 
 TEST(ASoundexEncoding, UppercasesFirstLetter) {
    CHECK_EQUAL("A", soundex.encode("abcd").substr(0, 1));
+}
+
+// START:test
+TEST(ASoundexEncoding, IgnoresCaseWhenEncodingConsonants) {
+   CHECK_EQUAL(soundex.encode("BCDL"), soundex.encode("bcdl"));
 }
 // END:test
 
