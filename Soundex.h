@@ -19,27 +19,27 @@ public:
       codes_['r'] = "6";
    }
 
+// START:impl
    std::string encode(const std::string& word) const {
       std::string code(1, head(word));
-      encode(tail(word), code);
+      encode(tail(word), code, head(word));
       return zeroPad(code);
    }
 
-// START:impl
-   void encode(const std::string& word, std::string& code) const {
-// START_HIGHLIGHT
+   void encode(const std::string& word, std::string& code, 
+         char H) const {
       if (word.empty() || isFull(code)) return;
-// END_HIGHLIGHT
-      code += codeFor(head(word));
-      encode(tail(word), code);
+      
+      std::string digit = codeFor(head(word));
+      if (digit != codeFor(H))
+         code += codeFor(head(word));
+      encode(tail(word), code, head(word));
    }
+// END:impl
 
-// START_HIGHLIGHT
    bool isFull(std::string& code) const {
       return code.length() == MaxCodeLength;
    }
-// END_HIGHLIGHT
-// END:impl
 
    char head(const std::string& word) const {
       return word[0];
