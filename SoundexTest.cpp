@@ -2,16 +2,16 @@
 
 #include "Soundex.h"
 
-TEST_GROUP(ASoundexEncoding) {
+TEST_GROUP(SoundexEncoding) {
    Soundex soundex;
 };
 
-TEST(ASoundexEncoding, AppendsZerosToWordForOneLetterWord) {
+TEST(SoundexEncoding, AppendsZerosToWordForOneLetterWord) {
    CHECK_EQUAL("A000", soundex.encode("A"));
    CHECK_EQUAL("B000", soundex.encode("B"));
 }
 
-TEST(ASoundexEncoding, ReplacesConsonantsWithAppropriateDigits) {
+TEST(SoundexEncoding, ReplacesConsonantsWithAppropriateDigits) {
    CHECK_EQUAL("A100", soundex.encode("Ab"));
    CHECK_EQUAL("A200", soundex.encode("Ac"));
    CHECK_EQUAL("A300", soundex.encode("Ad"));
@@ -33,7 +33,7 @@ TEST(ASoundexEncoding, ReplacesConsonantsWithAppropriateDigits) {
 }
 
 // START:test
-TEST(ASoundexEncoding, ReplacesMultipleConsonantsWithDigits) {
+TEST(SoundexEncoding, ReplacesMultipleConsonantsWithDigits) {
    CHECK_EQUAL("A234", soundex.encode("Acdl"));
 }
 // END:test
