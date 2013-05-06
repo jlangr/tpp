@@ -36,9 +36,19 @@ TEST(ASoundexEncoding, ReplacesMultipleConsonantsWithDigits) {
    CHECK_EQUAL("A234", soundex.encode("Acdl"));
 }
 
-// START:test
 TEST(ASoundexEncoding, IgnoresVowelLikeLetters) {
    CHECK_EQUAL("B234", soundex.encode("BAaEeIiOoUuHhYycdl"));
 }
-// END:test
+
+TEST(ASoundexEncoding, IgnoresNonAlphabetics) {
+   CHECK_EQUAL("F234", soundex.encode("F987654321%#.=+cdl"));
+}
+
+TEST(ASoundexEncoding, CombinesDuplicateEncodings) {
+   CHECK_EQUAL(soundex.codeFor('f'), soundex.codeFor('b'));
+   CHECK_EQUAL(soundex.codeFor('g'), soundex.codeFor('c'));
+   CHECK_EQUAL(soundex.codeFor('t'), soundex.codeFor('d'));
+
+   CHECK_EQUAL("A123", soundex.encode("Abfcgdt"));
+}
 
