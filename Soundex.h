@@ -17,21 +17,22 @@ public:
       codes_['r'] = "6";
    }
 
+// START:impl
    std::string encode(const std::string& word) const {
-      std::string code("");
-      code += head(word);
-      encodeTail(word, code);
+      std::string code(1, head(word));
+      encode(tail(word), code);
       return zeroPad(code);
    }
 
+   void encode(const std::string& word, std::string& code) const {
+      if (word.empty()) return;
+      code += codeFor(head(word));
+      encode(tail(word), code);
+   }
+// END:impl
+
    char head(const std::string& word) const {
       return word[0];
-   }
-
-   void encodeTail(const std::string& word, std::string& code) const {
-      if (word[1] == 0) return;
-      code += codeFor(word[1]);
-      encodeTail(tail(word), code);
    }
 
    std::string tail(const std::string& word) const {
@@ -50,10 +51,6 @@ public:
 // END_HIGHLIGHT
    }
 // END:impl
-
-   bool hasEncodedCharacters(const std::string& code) const {
-      return code[1] != 0;
-   }
 
 private:
    std::string codes_[128];
