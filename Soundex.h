@@ -23,23 +23,25 @@ public:
    std::string encode(const std::string& word) const {
       std::string code(1, head(word));
 // START_HIGHLIGHT
-      encode(tail(word), code, head(word));
+      encode(word, code);
 // END_HIGHLIGHT
       return zeroPad(code);
    }
 
-   void encode(const std::string& word, std::string& code, 
-// START_HIGHLIGHT
-         char H) const {
-// END_HIGHLIGHT
-      if (word.empty() || isFull(code)) return;
+   void encode(const std::string& word, std::string& code) const {
+      auto tailToEncode = tail(word);
+      if (tailToEncode.empty() || isFull(code)) return;
       
-// START_HIGHLIGHT
-      std::string digit = codeFor(head(word));
-      if (digit != codeFor(H))
-         code += codeFor(head(word));
-      encode(tail(word), code, head(word));
-// END_HIGHLIGHT
+      auto digit = codeFor(head(tailToEncode));
+      if (isSameEncodingAsLast(digit, word))
+         code += digit;
+      encode(tailToEncode, code);
+   }
+   
+   bool isSameEncodingAsLast(
+         const std::string& digit, 
+         const std::string& word) const {
+      return digit != codeFor(head(word));
    }
 // END:impl
 
