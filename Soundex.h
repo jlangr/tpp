@@ -65,7 +65,7 @@ public:
       return code + std::string(MaxCodeLength - code.length(), '0');
    }
 
-   char upper(char c) {
+   char upper(char c) const {
       return std::toupper(static_cast<unsigned char>(c));
    }
 
