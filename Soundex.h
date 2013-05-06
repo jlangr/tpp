@@ -28,10 +28,10 @@ public:
       return word[0];
    }
 
-   std::string encodeTail(const std::string& word, std::string& code) const {
-      if (word[1] == 0) return "";
+   void encodeTail(const std::string& word, std::string& code) const {
+      if (word[1] == 0) return;
       code += codeFor(word[1]);
-      return encodeTail(tail(word), code);
+      encodeTail(tail(word), code);
    }
 
    std::string tail(const std::string& word) const {
