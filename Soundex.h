@@ -35,12 +35,12 @@ public:
 
 // START:impl
 // START_HIGHLIGHT
-   std::string encodeTail(const std::string& word, std::string& code) const {
+   void encodeTail(const std::string& word, std::string& code) const {
 // END_HIGHLIGHT
-      if (word[1] == 0) return "";
+      if (word[1] == 0) return;
 // START_HIGHLIGHT
       code += codeFor(word[1]);
-      return encodeTail(tail(word), code);
+      encodeTail(tail(word), code);
 // END_HIGHLIGHT
    }
 
