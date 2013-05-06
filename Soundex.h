@@ -55,13 +55,9 @@ public:
       return word.substr(1);
    }
 
-// START:impl
    std::string codeFor(char c) const {
-// START_HIGHLIGHT
       return codes_[static_cast<size_t>(lower(c))];
-// END_HIGHLIGHT
    }
-// END:impl
 
    std::string zeroPad(const std::string& code) const {
       return code + std::string(MaxCodeLength - code.length(), '0');
