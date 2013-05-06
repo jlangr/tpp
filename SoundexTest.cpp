@@ -2,12 +2,12 @@
 
 #include "Soundex.h"
 
-TEST_GROUP(ASoundexEncoding) {
+TEST_GROUP(SoundexEncoding) {
    Soundex soundex;
 };
 
 // START:test
-TEST(ASoundexEncoding, AppendsZerosToWordForOneLetterWord) {
+TEST(SoundexEncoding, AppendsZerosToWordForOneLetterWord) {
    CHECK_EQUAL("A000", soundex.encode("A"));
 // START_HIGHLIGHT
    CHECK_EQUAL("B000", soundex.encode("B"));
