@@ -19,6 +19,7 @@ public:
       codes_['r'] = "6";
    }
 
+// START:impl
    std::string encode(const std::string& word) const {
       std::string code(1, toupper(head(word)));
       encode(word, code);
@@ -34,6 +35,7 @@ public:
          code += digit;
       encode(tailToEncode, code);
    }
+// END:impl
    
    bool isSameEncodingAsLast(
          const std::string& digit, 
