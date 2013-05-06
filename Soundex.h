@@ -3,6 +3,8 @@
 
 class Soundex {
 public:
+   const static size_t MaxCodeLength{4};
+
    Soundex() {
       initializeCodeMap();
    }
@@ -17,18 +19,26 @@ public:
       codes_['r'] = "6";
    }
 
-// START:impl
    std::string encode(const std::string& word) const {
       std::string code(1, head(word));
       encode(tail(word), code);
       return zeroPad(code);
    }
 
+// START:impl
    void encode(const std::string& word, std::string& code) const {
-      if (word.empty()) return;
+// START_HIGHLIGHT
+      if (word.empty() || isFull(code)) return;
+// END_HIGHLIGHT
       code += codeFor(head(word));
       encode(tail(word), code);
    }
+
+// START_HIGHLIGHT
+   bool isFull(std::string& code) const {
+      return code.length() == MaxCodeLength;
+   }
+// END_HIGHLIGHT
 // END:impl
 
    char head(const std::string& word) const {
@@ -43,14 +53,9 @@ public:
       return codes_[static_cast<size_t>(c)];
    }
 
-// START:impl
-   const static size_t MaxCodeLength{4};
    std::string zeroPad(const std::string& code) const {
-// START_HIGHLIGHT
       return code + std::string(MaxCodeLength - code.length(), '0');
-// END_HIGHLIGHT
    }
-// END:impl
 
 private:
    std::string codes_[128];
