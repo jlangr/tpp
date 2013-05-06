@@ -2,16 +2,16 @@
 
 #include "Soundex.h"
 
-TEST_GROUP(ASoundexEncoding) {
+TEST_GROUP(SoundexEncoding) {
    Soundex soundex;
 };
 
-TEST(ASoundexEncoding, AppendsZerosToWordForOneLetterWord) {
+TEST(SoundexEncoding, AppendsZerosToWordForOneLetterWord) {
    CHECK_EQUAL("A000", soundex.encode("A"));
    CHECK_EQUAL("B000", soundex.encode("B"));
 }
 
-TEST(ASoundexEncoding, ReplacesConsonantsWithAppropriateDigits) {
+TEST(SoundexEncoding, ReplacesConsonantsWithAppropriateDigits) {
    CHECK_EQUAL("A100", soundex.encode("Ab"));
    CHECK_EQUAL("A200", soundex.encode("Ac"));
    CHECK_EQUAL("A300", soundex.encode("Ad"));
@@ -32,20 +32,20 @@ TEST(ASoundexEncoding, ReplacesConsonantsWithAppropriateDigits) {
    CHECK_EQUAL("A200", soundex.encode("Az"));
 }
 
-TEST(ASoundexEncoding, ReplacesMultipleConsonantsWithDigits) {
+TEST(SoundexEncoding, ReplacesMultipleConsonantsWithDigits) {
    CHECK_EQUAL("A234", soundex.encode("Acdl"));
 }
 
-TEST(ASoundexEncoding, IgnoresVowelLikeLetters) {
+TEST(SoundexEncoding, IgnoresVowelLikeLetters) {
    CHECK_EQUAL("B234", soundex.encode("BAaEeIiOoUuHhYycdl"));
 }
 
-TEST(ASoundexEncoding, IgnoresNonAlphabetics) {
+TEST(SoundexEncoding, IgnoresNonAlphabetics) {
    CHECK_EQUAL("F234", soundex.encode("F987654321%#.=+cdl"));
 }
 
 // START:test
-TEST(ASoundexEncoding, CombinesDuplicateEncodings) {
+TEST(SoundexEncoding, CombinesDuplicateEncodings) {
    CHECK_EQUAL(soundex.codeFor('f'), soundex.codeFor('b'));
    CHECK_EQUAL(soundex.codeFor('g'), soundex.codeFor('c'));
    CHECK_EQUAL(soundex.codeFor('t'), soundex.codeFor('d'));
@@ -54,7 +54,7 @@ TEST(ASoundexEncoding, CombinesDuplicateEncodings) {
 }
 // END:test
 
-TEST(ASoundexEncoding, LimitsLengthToFourCharacters) {
+TEST(SoundexEncoding, LimitsLengthToFourCharacters) {
    CHECK_EQUAL(4u, soundex.encode("Dcdlb").length());
 }
 
