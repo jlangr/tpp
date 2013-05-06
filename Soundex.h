@@ -21,12 +21,13 @@ public:
 
 // START:impl
    std::string encode(const std::string& word) const {
-      std::string code(1, head(word));
 // START_HIGHLIGHT
-      encode(word, code);
+      std::string code(1, toupper(head(word)));
 // END_HIGHLIGHT
+      encode(word, code);
       return zeroPad(code);
    }
+// END:impl
 
    void encode(const std::string& word, std::string& code) const {
       auto tailToEncode = tail(word);
@@ -43,7 +44,6 @@ public:
          const std::string& word) const {
       return digit != codeFor(head(word));
    }
-// END:impl
 
    bool isFull(std::string& code) const {
       return code.length() == MaxCodeLength;
@@ -63,6 +63,10 @@ public:
 
    std::string zeroPad(const std::string& code) const {
       return code + std::string(MaxCodeLength - code.length(), '0');
+   }
+
+   char upper(char c) {
+      return std::toupper(static_cast<unsigned char>(c));
    }
 
 private:

@@ -52,21 +52,23 @@ TEST(ASoundexEncoding, CombinesDuplicateEncodings) {
    CHECK_EQUAL("A123", soundex.encode("Abfcgdt"));
 }
 
-// START:test2
 TEST(ASoundexEncoding, CombinesMultipleDuplicateEncodings) {
    CHECK_EQUAL("J100", soundex.encode("Jbbb"));
 }
-// END:test2
-
-TEST(ASoundexEncoding, CombinesDuplicateCodesWhen2ndLetterDuplicates1st) {
-   CHECK_EQUAL("b230", soundex.encode("bbcd"));
-}
 
 // START:test
+TEST(ASoundexEncoding, CombinesDuplicateCodesWhen2ndLetterDuplicates1st) {
+   CHECK_EQUAL("B230", soundex.encode("bbcd"));
+}
+
+TEST(ASoundexEncoding, UppercasesFirstLetter) {
+   CHECK_EQUAL("A", soundex.encode("abcd").substr(0, 1));
+}
+// END:test
+
 TEST(ASoundexEncoding, DoesNotCombineDuplicateEncodingsSeparatedByVowels) {
    CHECK_EQUAL("J110", soundex.encode("Jbob")); 
 }
-// END:test
 
 TEST(ASoundexEncoding, LimitsLengthToFourCharacters) {
    CHECK_EQUAL(4u, soundex.encode("Dcdlb").length());
