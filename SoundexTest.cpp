@@ -64,11 +64,9 @@ TEST(ASoundexEncoding, UppercasesFirstLetter) {
    CHECK_EQUAL("A", soundex.encode("abcd").substr(0, 1));
 }
 
-// START:test
 TEST(ASoundexEncoding, IgnoresCaseWhenEncodingConsonants) {
    CHECK_EQUAL(soundex.encode("BCDL"), soundex.encode("bcdl"));
 }
-// END:test
 
 TEST(ASoundexEncoding, DoesNotCombineDuplicateEncodingsSeparatedByVowels) {
    CHECK_EQUAL("J110", soundex.encode("Jbob")); 
@@ -77,4 +75,10 @@ TEST(ASoundexEncoding, DoesNotCombineDuplicateEncodingsSeparatedByVowels) {
 TEST(ASoundexEncoding, LimitsLengthToFourCharacters) {
    CHECK_EQUAL(4u, soundex.encode("Dcdlb").length());
 }
+
+// START:test
+TEST(ASoundexEncoding, PadsWithZerosToEnsureThreeDigits) {
+   CHECK_EQUAL("I000", soundex.encode("I"));
+}
+// END:test
 
